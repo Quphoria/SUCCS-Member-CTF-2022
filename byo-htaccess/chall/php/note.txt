@@ -1,0 +1,3 @@
+I moved the flag to a php file for easy access so no more flag theft!
+It's in a variable called $FLAG
+- Quphoria

@@ -1,0 +1,21 @@
+FROM alpine:3.14
+RUN apk add --no-cache apache2 php7-apache2 php7-session
+
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+
+WORKDIR /var/www/html
+
+COPY httpd.conf /etc/apache2/httpd.conf
+
+COPY chall/ .
+
+COPY flag.txt /flag
+
+RUN mkdir /var/www/html/uploads/super_secret_session_80b7488a21
+RUN ln -s /flag /var/www/html/uploads/super_secret_session_80b7488a21/flag
+
+RUN chmod 777 /var/www/html/uploads
+
+EXPOSE 80
+
+ENTRYPOINT ["/docker-entrypoint.sh"]

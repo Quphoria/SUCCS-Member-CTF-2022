@@ -1,0 +1,63 @@
+version: '3'
+
+services:
+  welcome:
+    image: welcome
+    hostname: welcome
+    networks:
+      no-internet:
+        ipv4_address: 10.100.0.10
+    restart: unless-stopped
+
+  qweb-0x1:
+    image: whats-htaccess
+    hostname: qweb-0x1
+    networks:
+      no-internet:
+        ipv4_address: 10.100.0.11
+    restart: unless-stopped
+
+  qweb-0x2:
+    image: byo-htaccess
+    hostname: qweb-0x2
+    networks:
+      no-internet:
+        ipv4_address: 10.100.0.12
+    restart: unless-stopped
+
+  qweb-0x3:
+    image: jwt_is_secure_right
+    hostname: qweb-0x3
+    networks:
+      no-internet:
+        ipv4_address: 10.100.0.13
+    restart: unless-stopped
+
+  openvpn-gateway:
+    image: openvpn-gateway
+    networks:
+      no-internet:
+        ipv4_address: 10.100.0.254
+      internet:
+    environment:
+      - HOSTS=welcome:10.100.0.10;qweb-0x1:10.100.0.11;qweb-0x2:10.100.0.12;qweb-0x3:10.100.0.13
+    ports:
+      - "1199:1199/udp"
+    volumes:
+      - /home/owner/ctf-ssl/:/ssl
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+
+networks:
+  no-internet:
+    driver: bridge
+    internal: true
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.100.0.0/24
+  internet:
+    driver: bridge

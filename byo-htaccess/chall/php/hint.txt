@@ -1,0 +1,4 @@
+I have disabled script execution for the uploads directory,
+so no more cheeky php scripts for you
+
+It should be impossible to override, I think?
