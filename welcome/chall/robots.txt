@@ -2,4 +2,4 @@ No flag here :(
 
 I guess you are close tho...
 
-I hate lots of metadata files in the website root
+I hate lots of metadata files in the website root, but you should know where to find it
