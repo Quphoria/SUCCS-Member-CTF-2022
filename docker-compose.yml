@@ -3,7 +3,7 @@ version: '3'
 services:
   welcome:
     image: welcome
-    hostname: welcome
+    hostname: welcome.ctf
     networks:
       no-internet:
         ipv4_address: 10.100.0.10
@@ -11,7 +11,7 @@ services:
 
   qweb-0x1:
     image: whats-htaccess
-    hostname: qweb-0x1
+    hostname: qweb-0x1.ctf
     networks:
       no-internet:
         ipv4_address: 10.100.0.11
@@ -19,7 +19,7 @@ services:
 
   qweb-0x2:
     image: byo-htaccess
-    hostname: qweb-0x2
+    hostname: qweb-0x2.ctf
     networks:
       no-internet:
         ipv4_address: 10.100.0.12
@@ -27,7 +27,7 @@ services:
 
   qweb-0x3:
     image: jwt_is_secure_right
-    hostname: qweb-0x3
+    hostname: qweb-0x3.ctf
     networks:
       no-internet:
         ipv4_address: 10.100.0.13
@@ -39,8 +39,6 @@ services:
       no-internet:
         ipv4_address: 10.100.0.254
       internet:
-    environment:
-      - HOSTS=welcome:10.100.0.10;qweb-0x1:10.100.0.11;qweb-0x2:10.100.0.12;qweb-0x3:10.100.0.13
     ports:
       - "1199:1199/udp"
     volumes:

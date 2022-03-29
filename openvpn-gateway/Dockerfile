@@ -1,5 +1,5 @@
 FROM alpine:3.14
-RUN apk add --no-cache openvpn dnsmasq bash
+RUN apk add --no-cache openvpn bind bash
 
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
@@ -16,7 +16,7 @@ WORKDIR /vpn
 # - /etc/ctf-ssl/:/ssl
 
 COPY config.ovpn /vpn/config.ovpn
-COPY dnsmasq.conf /etc/dnsmasq.conf
+COPY bind.conf /etc/bind.conf
 
 EXPOSE 1199
 

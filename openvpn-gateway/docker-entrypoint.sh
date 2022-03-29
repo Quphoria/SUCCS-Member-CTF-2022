@@ -1,21 +1,7 @@
 #!/bin/bash
 
-# write the hosts env variable to the hosts file
-rm -f /etc/ctf-hosts
-
-ctf_hosts=$(echo $HOSTS | tr ";" "\n")
-
-for host in $ctf_hosts
-do
-    ctf_host=$(echo $host | cut -f1 -d:)
-    ctf_ip=$(echo $host | cut -f2 -d:)
-    echo "$ctf_ip  $ctf_host" >> /etc/ctf-hosts
-done
-
-echo "CTF Hosts:"
-cat /etc/ctf-hosts
-
-dnsmasq
+# named -c /etc/bind.conf -4 -f -d 99 &
+named -c /etc/bind.conf -4 -f &
 
 # Accept DNS requests from vpn
 iptables -I INPUT -i tun0 -p udp --dport 53 -j ACCEPT
