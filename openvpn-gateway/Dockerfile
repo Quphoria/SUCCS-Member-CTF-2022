@@ -1,7 +1,8 @@
 FROM alpine:3.14
-RUN apk add --no-cache openvpn bind bash
+RUN apk add --no-cache dos2unix openvpn bind bash
 
 COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN dos2unix /docker-entrypoint.sh
 
 WORKDIR /vpn
 

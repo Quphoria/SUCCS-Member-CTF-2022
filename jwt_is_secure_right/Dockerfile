@@ -1,7 +1,8 @@
 FROM alpine:3.14
-RUN apk add --no-cache apache2 php7-apache2 composer git
+RUN apk add --no-cache dos2unix apache2 php7-apache2 composer git
 
 COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN dos2unix /docker-entrypoint.sh
 
 WORKDIR /var/www/html
 
